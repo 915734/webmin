@@ -1,14 +1,12 @@
-########################### Configure Webmin with bind9 ###########################
-# Update repo
+# Update Repo
         apt-get update
 # Install webmin dependency on ubuntu
         apt-get install perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python
 # Clone webmin & unzip webmin
 # Install Webmin
         dpkg --install webmin_1.840_all.deb
-# Install bind9 using webmin control plane https://host-ip-address:10000
+# Install bind9 using webmin control plane "https://host-ip-address:10000"
 
-########################### Configure Samba Domain Conterller ###########################
 # Install Samba server dependency
         apt-get install attr build-essential libacl1-dev libattr1-dev libblkid-dev libgnutls-dev libreadline-dev python-dev libpam0g-dev python-dnspython gdb pkg-config libpopt-dev libldap2-dev dnsutils libbsd-dev attr krb5-user docbook-xsl libcups2-dev acl ntp ntpdate winbind
 # Install Samba Package
