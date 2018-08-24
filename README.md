@@ -1,25 +1,25 @@
 ########################### Configure Webmin with bind9 ###########################
 # Update repo
-apt-get update
+        apt-get update
 # Install webmin dependency on ubuntu
-apt-get install perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python
+        apt-get install perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python
 # Clone webmin & unzip webmin
 # Install Webmin
-dpkg --install webmin_1.840_all.deb
+        dpkg --install webmin_1.840_all.deb
 # Install bind9 using webmin control plane https://host-ip-address:10000
 
 ########################### Configure Samba Domain Conterller ###########################
 # Install Samba server dependency
-apt-get install attr build-essential libacl1-dev libattr1-dev libblkid-dev libgnutls-dev libreadline-dev python-dev libpam0g-dev python-dnspython gdb pkg-config libpopt-dev libldap2-dev dnsutils libbsd-dev attr krb5-user docbook-xsl libcups2-dev acl ntp ntpdate winbind
+        apt-get install attr build-essential libacl1-dev libattr1-dev libblkid-dev libgnutls-dev libreadline-dev python-dev libpam0g-dev python-dnspython gdb pkg-config libpopt-dev libldap2-dev dnsutils libbsd-dev attr krb5-user docbook-xsl libcups2-dev acl ntp ntpdate winbind
 # Install Samba Package
-apt-get install samba smbclient
+        apt-get install samba smbclient
 # Make sure IP address
 # Make sure Hostname
 # Make sure Domain Nme in resolve.conf
 # Remove Samba Conf file
-rm -rf /etc/samba/smb.conf
+        rm -rf /etc/samba/smb.conf
 # Verify database version using bellow command and make sure that database version is enable in this file. ->  /var/lib/samba/private/named.conf
-named -V
+        named -V
 # Add bellow line -> /etc/bind/named.conf.options
         listen-on-v6 { any; };
         auth-nxdomain yes;
@@ -34,7 +34,7 @@ named -V
   /var/tmp/* rw,
   /dev/urandom rw,
 # Add bellow line -> /etc/bind/named.conf
-include "/var/lib/samba/private/named.conf";
+        include "/var/lib/samba/private/named.conf";
 # Configure Samba Domain Contoller Using below command
 samba-tool domain provision --use-rfc2307 --interactive
 -> Using DNS backend:- BIND9_DLZ
@@ -63,8 +63,8 @@ samba-tool domain provision --use-rfc2307 --interactive
 
 ########################### Configure ntp server ###########################
 # Remove existing time location
-rm -rf /etc/localtime
+        rm -rf /etc/localtime
 # Create soft link with your country time zone
-ln -s /usr/share/zoneinfo/Asia/Calcutta /etc/localtime
+        ln -s /usr/share/zoneinfo/Asia/Calcutta /etc/localtime
 # set timezome
-timedatectl set-timezone "Asia/Kolkata"
+        timedatectl set-timezone "Asia/Kolkata"
