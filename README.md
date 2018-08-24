@@ -24,40 +24,40 @@
         empty-zones-enable no;
         tkey-gssapi-keytab "/var/lib/samba/private/dns.keytab";
 # Add bellow line end of file -> /etc/apparmor.d/usr.sbin.named
-  /usr/lib/x86_64-linux-gnu/ldb/** rwmk,
-  /usr/lib/x86_64-linux-gnu/samba/** rwmk,
-  /var/lib/samba/private/dns/** rwmk,
-  /var/lib/samba/private/named.conf r,
-  /var/lib/samba/private/dns.keytab r,
-  /var/tmp/* rw,
-  /dev/urandom rw,
+          /usr/lib/x86_64-linux-gnu/ldb/** rwmk,
+          /usr/lib/x86_64-linux-gnu/samba/** rwmk,
+          /var/lib/samba/private/dns/** rwmk,
+          /var/lib/samba/private/named.conf r,
+          /var/lib/samba/private/dns.keytab r,
+          /var/tmp/* rw,
+          /dev/urandom rw,
 # Add bellow line -> /etc/bind/named.conf
         include "/var/lib/samba/private/named.conf";
 # Configure Samba Domain Contoller Using below command
-samba-tool domain provision --use-rfc2307 --interactive
+        samba-tool domain provision --use-rfc2307 --interactive
 -> Using DNS backend:- BIND9_DLZ
 # Verify bellow configure in this file "/etc/samba/smb.conf" if any configuration missing so add menualy
-[global]
-        workgroup = PRASHANT
-        realm = PRASHANT.COM
-        netbios name = SRV
-        server role = active directory domain controller
-        server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate
-        idmap_ldb:use rfc2307 = yes
+        [global]
+                workgroup = PRASHANT
+                realm = PRASHANT.COM
+                netbios name = SRV
+                server role = active directory domain controller
+                server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate
+                idmap_ldb:use rfc2307 = yes
 
-        ldap server require strong auth = no
+                ldap server require strong auth = no
 
-[netlogon]
-        path = /var/lib/samba/sysvol/prashant.com/scripts
-        read only = No
+        [netlogon]
+                path = /var/lib/samba/sysvol/prashant.com/scripts
+                read only = No
 
-[sysvol]
-        path = /var/lib/samba/sysvol
-        read only = No
-        allow dns updates = nonsecure and secure
-        dns forwarder = 10.0.0.11
-        printing = CUPS
-        printcap name = /dev/null
+        [sysvol]
+                path = /var/lib/samba/sysvol
+                read only = No
+                allow dns updates = nonsecure and secure
+                dns forwarder = 10.0.0.11
+                printing = CUPS
+                printcap name = /dev/null
 
 ########################### Configure ntp server ###########################
 # Remove existing time location
